@@ -3,6 +3,8 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import PropTypes from 'prop-types';
 
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
 
 const ListItem = (props) => {
   return (
@@ -10,7 +12,7 @@ const ListItem = (props) => {
       <View style={styles.imageBox}>
         <Image
           style={{width: 100, height: 100}}
-          source={{uri: props.singleMedia.thumbnails.w160}}
+          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
         />
       </View>
 
