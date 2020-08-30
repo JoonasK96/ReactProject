@@ -1,34 +1,53 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import PropTypes from 'prop-types';
 
-const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
-
 
 const ListItem = (props) => {
   return (
-    <TouchableOpacity>
-      <View style={styles.imageBox}>
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.imageContainer}>
         <Image
-          style={{width: 100, height: 100}}
-          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
+          style={styles.image}
+          source={{uri: props.singleMedia.thumbnails.w160}}
         />
       </View>
-
-      <View>
-        <Text>{props.singleMedia.title}</Text>
-        <Text>{props.singleMedia.description}</Text>
+      <View style={styles.textview}>
+        <Text style={styles.title}>{props.singleMedia.title}</Text>
+        <Text style={styles.description}>{props.singleMedia.description}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  imageBox: {
+  container: {
+    backgroundColor: 'lightblue',
+    flexDirection: 'row',
+    padding: 20,
+    marginBottom: 5,
+  },
+  imageContainer: {
     flex: 1,
   },
+  image: {
+    height: 200,
+    width: 200,
+    borderRadius: 10,
+  },
+  textview: {
+    //flex: 1,
+    padding: 10,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingBottom: 1,
+  },
 });
+
 
 ListItem.propTypes = {
   singleMedia: PropTypes.object,

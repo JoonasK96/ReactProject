@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 import {StatusBar} from 'expo-status-bar';
 import React from 'react';
