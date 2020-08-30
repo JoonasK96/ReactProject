@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 import {StatusBar} from 'expo-status-bar';
 import React from 'react';
@@ -19,8 +18,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 });
 

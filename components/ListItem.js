@@ -1,9 +1,7 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import PropTypes from 'prop-types';
-
 
 const ListItem = (props) => {
   return (
@@ -26,25 +24,22 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'lightblue',
     flexDirection: 'row',
-    padding: 20,
+    padding: 15,
     marginBottom: 5,
   },
   imageContainer: {
     flex: 1,
   },
   image: {
-    height: 200,
-    width: 200,
-    borderRadius: 10,
+    flex: 1,
   },
   textview: {
-    //flex: 1,
+    flex: 1,
     padding: 10,
   },
   title: {
     fontWeight: 'bold',
     fontSize: 20,
-    paddingBottom: 1,
   },
 });
 
