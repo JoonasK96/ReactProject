@@ -25,13 +25,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     flexDirection: 'row',
     padding: 15,
-    marginBottom: 5,
+    marginBottom: 15,
+    borderRadius: 10,
+    borderColor: 'black',
+    borderWidth: 3,
+    shadowColor: 'brown',
+    shadowOffset: {width: 5, height: 5},
+    shadowOpacity: 10,
+    shadowRadius: 5,
+    elevation: 2,
   },
   imageContainer: {
     flex: 1,
   },
   image: {
     flex: 1,
+    borderRadius: 100,
   },
   textview: {
     flex: 1,
@@ -40,6 +49,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 20,
+    color: '#00008B',
   },
 });
 
