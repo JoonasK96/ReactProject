@@ -3,12 +3,15 @@ import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import List from '../components/List';
+import PropTypes from 'prop-types';
 
 
-const App = () => {
+const Home = ({navigation}) => {
+  // const {navigation} = props;
+  // const navigation = props.navigation;
   return (
     <View style={styles.container}>
-      <List />
+      <List navigation={navigation} />
       <StatusBar style="auto" />
     </View>
   );
@@ -18,9 +21,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
 
-export default App;
+Home.propTypes = {
+  navigation: PropTypes.object,
+};
+
+export default Home;
