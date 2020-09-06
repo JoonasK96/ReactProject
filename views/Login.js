@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {AuthContext} from '../contexts/AuthContext';

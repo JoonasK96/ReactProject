@@ -14,7 +14,10 @@ const Profile = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Profile</Text>
+      <Text>{user.email}</Text>
+      <Text>{user.full_name}</Text>
+      <Text>{user.user_id}</Text>
+      <Text>{user.username}</Text>
       <Button title={'Logout'} onPress={logout} />
     </SafeAreaView>
   );
