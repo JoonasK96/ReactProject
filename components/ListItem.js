@@ -1,38 +1,35 @@
 /* eslint-disable max-len */
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import PropTypes from 'prop-types';
+import {ListItem as NBListItem, Left, Thumbnail, Body, Right, Button, Text, Icon} from 'native-base';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-
 const ListItem = ({navigation, singleMedia}) => {
   return (
-    <TouchableOpacity onPress={
-      () => {
-        navigation.navigate('Single', {file: singleMedia});
-      }
-    }>
-      <View style={styles.imageBox}>
-        <Image
-          style={{width: 100, height: 100}}
+    <NBListItem thumbnail>
+      <Left>
+        <Thumbnail
+          square
           source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
         />
-      </View>
-
-      <View>
+      </Left>
+      <Body>
         <Text>{singleMedia.title}</Text>
-        <Text>{singleMedia.description}</Text>
-      </View>
-    </TouchableOpacity>
+        <Text note numberOfLines={1}>{singleMedia.description}</Text>
+      </Body>
+      <Right>
+        <Button info onPress={
+          () => {
+            navigation.navigate('Single', {file: singleMedia});
+          }}>
+          <Icon name={'eye'}></Icon>
+          <Text>View</Text>
+        </Button>
+      </Right>
+    </NBListItem>
   );
 };
-
-const styles = StyleSheet.create({
-  imageBox: {
-    flex: 1,
-  },
-});
 
 ListItem.propTypes = {
   singleMedia: PropTypes.object,

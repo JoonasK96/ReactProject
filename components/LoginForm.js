@@ -1,34 +1,34 @@
+/* eslint-disable max-len */
 import React, {useContext} from 'react';
-import {
-  View,
-  Button,
-} from 'react-native';
 import PropTypes from 'prop-types';
 import {AuthContext} from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import {postLogIn} from '../hooks/APIhooks';
 import FormTextInput from './FormTextInput';
 import useLoginForm from '../hooks/LoginHooks';
+import {Button, Text, Form} from 'native-base';
 
 const LoginForm = ({navigation}) => {
-  const {setIsLoggedIn} = useContext(AuthContext);
+  const {setIsLoggedIn, setUser} = useContext(AuthContext);
   const doLogin = async () => {
     try {
       const userData = await postLogIn(inputs);
       console.log('user login success', userData);
       setIsLoggedIn(true);
+      setUser(userData.user);
       await AsyncStorage.setItem('userToken', userData.token);
     } catch (e) {
       console.log('login error', e.message);
     }
-
-    // navigation.navigate('Home'); */
   };
 
   const {handleInputChange, inputs} = useLoginForm();
 
   return (
-    <View>
+    <Form>
+      <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>
+        Sign in
+      </Text>
       <FormTextInput
         autoCapitalize="none"
         placeholder="username"
@@ -40,8 +40,10 @@ const LoginForm = ({navigation}) => {
         onChangeText={(txt) => handleInputChange('password', txt)}
         secureTextEntry={true}
       />
-      <Button title='Login!' onPress={doLogin} />
-    </View>
+      <Button block info onPress={doLogin}>
+        <Text>Login!</Text>
+      </Button>
+    </Form>
   );
 };
 

@@ -1,15 +1,12 @@
+/* eslint-disable max-len */
 import React, {useContext, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
 import PropTypes from 'prop-types';
 import {AuthContext} from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import {checkToken} from '../hooks/APIhooks';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
+import {Container, Content, Title, Icon} from 'native-base';
 
 const Login = ({navigation}) => { // props is needed for navigation
   const {setIsLoggedIn, setUser} = useContext(AuthContext);
@@ -35,22 +32,17 @@ const Login = ({navigation}) => { // props is needed for navigation
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Login</Text>
-      <LoginForm navigation={navigation} />
-      <RegisterForm navigation={navigation} />
-    </View>
+    <Container>
+      <Content padder>
+        <Title>
+          <Icon name='happy' style={{fontSize: 200}} />
+        </Title>
+        <LoginForm navigation={navigation} />
+        <RegisterForm navigation={navigation} />
+      </Content>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 Login.propTypes = {
   navigation: PropTypes.object,
