@@ -11,8 +11,14 @@ import {Button, Text, Form} from 'native-base';
 
 const RegisterForm = ({navigation}) => {
   const {setUser, setIsLoggedIn} = useContext(AuthContext);
-  // const [usernameAvailable, setUsernameAvailable] = useState('');
-  const {inputs, handleInputChange, registerErrors, validateOnSend, checkUserAvailable} = useSignUpForm();
+  const {
+    inputs,
+    handleInputChange,
+    handleInputEnd,
+    checkUserAvailable,
+    registerErrors,
+    validateOnSend,
+  } = useSignUpForm();
 
   const doRegister = async () => {
     if (!validateOnSend()) {
@@ -27,44 +33,43 @@ const RegisterForm = ({navigation}) => {
       setIsLoggedIn(true);
       setUser(userData.user);
     } catch (e) {
-      console.log('registration error', e.message);
+      console.log('registeration error', e.message);
     }
   };
 
-  // const checkUsernameAvailability = async (username) => {
-  //  setUsernameAvailable(await checkAvailable(username));
-  // console.log(usernameAvailable)
-  // };
+  console.log('RegisterForm', registerErrors);
 
   return (
     <Form>
-      <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>
-        Register
-      </Text>
       <FormTextInput
         autoCapitalize="none"
         placeholder="username"
         onChangeText={(txt) => handleInputChange('username', txt)}
-        onEndEditing={checkUserAvailable}
+        onEndEditing={(event) => {
+          checkUserAvailable(event);
+          handleInputEnd('username', event);
+        }}
         error={registerErrors.username}
       />
       <FormTextInput
         autoCapitalize="none"
         placeholder="email"
         onChangeText={(txt) => handleInputChange('email', txt)}
+        onEndEditing={(event) => handleInputEnd('email', event)}
         error={registerErrors.email}
-
       />
       <FormTextInput
         autoCapitalize="none"
         placeholder="full name"
         onChangeText={(txt) => handleInputChange('full_name', txt)}
+        onEndEditing={(event) => handleInputEnd('full_name', event)}
         error={registerErrors.full_name}
       />
       <FormTextInput
         autoCapitalize="none"
         placeholder="password"
         onChangeText={(txt) => handleInputChange('password', txt)}
+        onEndEditing={(event) => handleInputEnd('password', event)}
         secureTextEntry={true}
         error={registerErrors.password}
       />
@@ -72,6 +77,7 @@ const RegisterForm = ({navigation}) => {
         autoCapitalize="none"
         placeholder="confirm password"
         onChangeText={(txt) => handleInputChange('confirmPassword', txt)}
+        onEndEditing={(event) => handleInputEnd('confirmPassword', event)}
         secureTextEntry={true}
         error={registerErrors.confirmPassword}
       />
@@ -81,7 +87,9 @@ const RegisterForm = ({navigation}) => {
     </Form>
   );
 };
+
 RegisterForm.propTypes = {
   navigation: PropTypes.object,
 };
+
 export default RegisterForm;
