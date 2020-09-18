@@ -50,8 +50,7 @@ const Upload = ({navigation}) => {
         doReset();
         navigation.push('Home');
       }, 2000);
-    }
-    catch (e) {
+    } catch (e) {
       console.log('upload error:', e.message);
     } finally {
       setIsLoading(false);
