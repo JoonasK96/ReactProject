@@ -69,6 +69,7 @@ const useUploadForm = (callback) => {
     handleInputChange,
     validateOnSend,
     reset,
+    setInputs,
     inputs,
     uploadErrors,
   };

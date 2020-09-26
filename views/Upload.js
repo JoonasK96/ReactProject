@@ -11,11 +11,12 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import {upload, postTag, appIdentifier} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import {Video} from 'expo-av';
 
 const Upload = ({navigation}) => {
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [fileType, setFileType] = useState('image');
 
   const doUpload = async () => {
     setIsLoading(true);
@@ -28,8 +29,10 @@ const Upload = ({navigation}) => {
       // lisätään tiedosto formDataan
       const filename = image.split('/').pop();
       const match = /\.(\w+)$/.exec(filename);
-      let type = match ? `image/${match[1]}` : `image`;
+      let type = match ? `${fileType}/${match[1]}` : fileType;
       if (type === 'image/jpg') type = 'image/jpeg';
+
+
       formData.append('file', {uri: image, name: filename, type});
 
       // haetaan token
@@ -67,6 +70,7 @@ const Upload = ({navigation}) => {
       });
       if (!result.cancelled) {
         setImage(result.uri);
+        setFileType(result.type);
       }
 
       console.log(result);
@@ -106,10 +110,19 @@ const Upload = ({navigation}) => {
     <Container>
       <Content padder>
         {image &&
-          <Image
-            source={{uri: image}}
-            style={{height: 400, width: null, flex: 1}}
-          />
+          <>
+            {fileType === 'image' ?
+              <Image
+                source={{uri: image}}
+                style={{height: 400, width: null, flex: 1}}
+              /> :
+              <Video
+                source={{uri: image}}
+                style={{height: 400, width: null, flex: 1}}
+                useNativeControls={true}
+              />
+            }
+          </>
         }
         <Form>
           <FormTextInput
