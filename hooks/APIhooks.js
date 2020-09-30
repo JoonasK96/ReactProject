@@ -230,7 +230,47 @@ const getUser = async (id, token) => {
   }
   // http://media.mw.metropolia.fi/wbma/docs/#api-Tag-PostTag
 };
+
+const postFavourite = async (fileId, token) => {
+  console.log('postFavorite', fileId, token);
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify({file_id: fileId}),
+  };
+  try {
+    const response = await fetch(apiUrl + 'favourites', options);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  // http://media.mw.metropolia.fi/wbma/docs/#api-Favourite-PostFavourite
+};
+
+const getFavourite = async (fileId) => {
+  try {
+    const response = await fetch(apiUrl + 'favourites/file/' + fileId);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  // http://media.mw.metropolia.fi/wbma/docs/#api-Favourite-GetFileFavourites
+};
+
 export {
   useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile,
-  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser,
+  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser, postFavourite, getFavourite,
 };

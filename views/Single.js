@@ -1,18 +1,31 @@
 /* eslint-disable max-len */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
-import {Card, CardItem, Left, Icon, Title, Container, Content, Text} from 'native-base';
+import {Card, CardItem, Left, Icon, Title, Container, Content, Text, Button} from 'native-base';
 import {Video} from 'expo-av';
-import {getUser} from '../hooks/APIhooks';
+import {getFavourite, getUser, postFavourite} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import {AuthContext} from '../contexts/AuthContext';
+import useStateWithCallback from 'use-state-with-callback';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Single = ({route}) => {
+  const {user} = useContext(AuthContext);
   const [error, setError] = useState(false);
   const [owner, setOwner] = useState({});
+  const [favourites, setFavourites] = useStateWithCallback([], (favourites) => {
+    console.log('asdasd', favourites);
+    favourites.forEach((favourite) => {
+      console.log('failED', favourite, user);
+      if (favourite.user_id == user.user_id) {
+        setFavourited(true);
+      };
+    });
+  });
+  const [favourited, setFavourited] = useState(false);
   const [videoRef, setVideoRef] = useState(null);
   const {file} = route.params;
 
@@ -36,15 +49,15 @@ const Single = ({route}) => {
     await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
   };
 
-  const fetchOwner = async () => {
+  const fetchData = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
     setOwner(await getUser(file.user_id, userToken));
+    setFavourites(await getFavourite(file.file_id));
   };
 
   useEffect(() => {
     unlock();
-    fetchOwner();
-
+    fetchData();
     const orientSub = ScreenOrientation.addOrientationChangeListener((evt) => {
       console.log('orientation', evt);
       if (evt.orientationInfo.orientation > 2) {
@@ -58,7 +71,7 @@ const Single = ({route}) => {
     };
   }, [videoRef]);
 
-  console.log('kuva', mediaUrl + file.filename);
+  console.log('kuva', favourited, favourites);
   return (
     <Container>
       <Content padder>
@@ -104,6 +117,16 @@ const Single = ({route}) => {
             <Text>
               By: {owner.username}
             </Text>
+            <Button info disabled={favourited} onPress={async () => {
+              try {
+                const userToken = await AsyncStorage.getItem('userToken');
+                postFavourite(file.file_id, userToken);
+              } catch (e) {
+                console.log(e);
+              }
+            }}>
+              <Text>LIKE</Text>
+            </Button>
           </CardItem>
         </Card>
       </Content>
