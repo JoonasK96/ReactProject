@@ -1,13 +1,29 @@
-/* eslint-disable max-len */
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import PropTypes from 'prop-types';
-import {ListItem as NBListItem, Left, Thumbnail, Body, Right, Button, Text, Icon} from 'native-base';
-import {deleteFile} from '../hooks/APIhooks';
-import {AsyncStorage} from 'react-native';
+import {Image} from 'react-native';
+import {
+  ListItem as NBListItem,
+  Left,
+  Thumbnail,
+  Body,
+  Text,
+  Right,
+  Button,
+  Icon,
+  Card,
+  CardItem,
+  Content,
+} from 'native-base';
+import {deleteFile, getUser, getAvatar} from '../hooks/APIhooks';
+import AsyncStorage from '@react-native-community/async-storage';
+import {AuthContext} from '../contexts/AuthContext';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListItem = ({navigation, singleMedia, editable}) => {
+  const [owner, setOwner] = useState({});
+  const [avatar, setAvatar] = useState([{filename: ''}]);
+  const {user} = useContext(AuthContext);
   const doDelete = async () => {
     try {
       const userToken = await AsyncStorage.getItem('userToken');
@@ -20,43 +36,66 @@ const ListItem = ({navigation, singleMedia, editable}) => {
       console.error(e);
     }
   };
-
+  const fetchOwner = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    setOwner(await getUser(singleMedia.user_id, userToken));
+  };
+  const fetchAvatar = async () => {
+    setAvatar(await getAvatar(user.user_id));
+  };
+  useEffect(() => {
+    fetchOwner();
+    fetchAvatar();
+  }, []);
 
   return (
-    <NBListItem thumbnail>
-      <Left>
-        <Thumbnail
-          square
-          source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
-        />
-      </Left>
-      <Body>
-        <Text>{singleMedia.title}</Text>
-        <Text note numberOfLines={1}>{singleMedia.description}</Text>
-      </Body>
-      <Right>
-        <Button transparent onPress={
-          () => {
-            navigation.navigate('Single', {file: singleMedia});
-          }}>
-          <Icon name={'eye'}></Icon>
-          <Text>View</Text>
-        </Button>
-        {editable && <>
-          <Button success transparent onPress={
-            () => {
-              navigation.navigate('Modify', {file: singleMedia});
-            }}>
-            <Icon name={'create'}></Icon>
-            <Text>Modify</Text>
-          </Button>
-          <Button danger transparent onPress={doDelete}>
-            <Icon name={'trash'}></Icon>
-            <Text>Delete</Text>
-          </Button>
-        </>
-        }
-      </Right>
+    <NBListItem>
+      <Content>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail
+                source={{uri: mediaUrl + avatar[0].filename}}
+              />
+              <Body>
+                <Text>{singleMedia.title}</Text>
+                <Text note numberOfLines={1}> By: {owner.username}</Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem cardBody>
+            <Thumbnail
+              square
+              source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
+              style={{height: 400, width: null, flex: 1}}/>
+
+          </CardItem>
+
+          <Right>
+            <Button transparent onPress={
+              () => {
+                navigation.navigate('Single', {file: singleMedia});
+              }}>
+              <Icon name={'eye'}></Icon>
+              <Text>View</Text>
+            </Button>
+            {editable && <>
+              <Button success transparent onPress={
+                () => {
+                  navigation.navigate('Modify', {file: singleMedia});
+                }}>
+                <Icon name={'create'}></Icon>
+                <Text>Modify</Text>
+              </Button>
+              <Button danger transparent onPress={doDelete}>
+                <Icon name={'trash'}></Icon>
+                <Text>Delete</Text>
+              </Button>
+            </>
+            }
+          </Right>
+        </Card>
+      </Content>
     </NBListItem>
   );
 };

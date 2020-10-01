@@ -13,11 +13,13 @@ const useLoadMedia = (all, userId) => {
       // const response = await fetch(apiUrl + 'media');
       const response = await fetch(apiUrl + 'tags/' + appIdentifier);
       const json = await response.json();
-      const media = await Promise.all(json.map(async (item) => {
-        const resp2 = await fetch(apiUrl + 'media/' + item.file_id);
-        const json2 = await resp2.json();
-        return json2;
-      }));
+      const media = await Promise.all(
+          json.map(async (item) => {
+            const resp2 = await fetch(apiUrl + 'media/' + item.file_id);
+            const json2 = await resp2.json();
+            return json2;
+          }),
+      );
       // console.log('loadMedia', media);
       if (all) {
         setMediaArray(media);
@@ -92,9 +94,9 @@ const checkToken = async (token) => {
   }
 };
 
-const getAvatar = async () => {
+const getAvatar = async (id) => {
   try {
-    const response = await fetch(apiUrl + 'tags/avatar_649');
+    const response = await fetch(apiUrl + 'tags/avatar_' + id);
     const avatarImages = await response.json();
     if (response.ok) {
       return avatarImages;
@@ -231,6 +233,16 @@ const getUser = async (id, token) => {
   // http://media.mw.metropolia.fi/wbma/docs/#api-Tag-PostTag
 };
 export {
-  useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile,
-  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser,
+  useLoadMedia,
+  postLogIn,
+  checkToken,
+  postRegistration,
+  getAvatar,
+  updateFile,
+  checkAvailable,
+  upload,
+  deleteFile,
+  appIdentifier,
+  postTag,
+  getUser,
 };

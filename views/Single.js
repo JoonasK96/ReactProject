@@ -2,7 +2,16 @@
 import React, {useState, useEffect} from 'react';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
-import {Card, CardItem, Left, Icon, Title, Container, Content, Text} from 'native-base';
+import {
+  Card,
+  CardItem,
+  Left,
+  Icon,
+  Title,
+  Container,
+  Content,
+  Text,
+} from 'native-base';
 import {Video} from 'expo-av';
 import {getUser} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -33,7 +42,9 @@ const Single = ({route}) => {
   };
 
   const lock = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+    );
   };
 
   const fetchOwner = async () => {
@@ -71,17 +82,18 @@ const Single = ({route}) => {
           </CardItem>
           <CardItem cardBody>
             <>
-              {file.media_type === 'image' ?
+              {file.media_type === 'image' ? (
                 <Image
                   source={{uri: mediaUrl + file.filename}}
                   style={{height: 400, width: null, flex: 1}}
-                /> :
+                />
+              ) : (
                 <Video
                   ref={handleVideoRef}
                   source={{
-                    uri:
-                      error ? 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
-                        mediaUrl + file.filename,
+                    uri: error ?
+                      'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
+                      mediaUrl + file.filename,
                   }}
                   style={{height: 400, width: null, flex: 1}}
                   useNativeControls={true}
@@ -94,21 +106,16 @@ const Single = ({route}) => {
                     setError(true);
                   }}
                 />
-              }
+              )}
             </>
           </CardItem>
           <CardItem style={{flexDirection: 'column'}}>
-            <Text>
-              {file.description}
-            </Text>
-            <Text>
-              By: {owner.username}
-            </Text>
+            <Text>{file.description}</Text>
+            <Text>By: {owner.username}</Text>
           </CardItem>
         </Card>
       </Content>
     </Container>
-
   );
 };
 
