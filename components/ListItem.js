@@ -23,7 +23,6 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const ListItem = ({navigation, singleMedia, editable}) => {
   const [owner, setOwner] = useState({});
   const [avatar, setAvatar] = useState([{filename: ''}]);
-  const {user} = useContext(AuthContext);
   const doDelete = async () => {
     try {
       const userToken = await AsyncStorage.getItem('userToken');
@@ -41,7 +40,7 @@ const ListItem = ({navigation, singleMedia, editable}) => {
     setOwner(await getUser(singleMedia.user_id, userToken));
   };
   const fetchAvatar = async () => {
-    setAvatar(await getAvatar(user.user_id));
+    setAvatar(await getAvatar(singleMedia.user_id));
   };
   useEffect(() => {
     fetchOwner();
