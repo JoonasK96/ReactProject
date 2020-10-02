@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
@@ -13,11 +13,13 @@ const useLoadMedia = (all, userId) => {
       // const response = await fetch(apiUrl + 'media');
       const response = await fetch(apiUrl + 'tags/' + appIdentifier);
       const json = await response.json();
-      const media = await Promise.all(json.map(async (item) => {
-        const resp2 = await fetch(apiUrl + 'media/' + item.file_id);
-        const json2 = await resp2.json();
-        return json2;
-      }));
+      const media = await Promise.all(
+        json.map(async (item) => {
+          const resp2 = await fetch(apiUrl + 'media/' + item.file_id);
+          const json2 = await resp2.json();
+          return json2;
+        })
+      );
       // console.log('loadMedia', media);
       if (all) {
         setMediaArray(media);
@@ -38,7 +40,7 @@ const useLoadMedia = (all, userId) => {
 const postLogIn = async (userCreds) => {
   const options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userCreds),
   };
   try {
@@ -57,7 +59,7 @@ const postLogIn = async (userCreds) => {
 const postRegistration = async (newUser) => {
   const options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser),
   };
   try {
@@ -77,7 +79,7 @@ const postRegistration = async (newUser) => {
 const checkToken = async (token) => {
   const options = {
     method: 'GET',
-    headers: {'x-access-token': token},
+    headers: { 'x-access-token': token },
   };
   try {
     const response = await fetch(apiUrl + 'users/user', options);
@@ -127,7 +129,7 @@ const checkAvailable = async (username) => {
 const upload = async (fd, token) => {
   const options = {
     method: 'POST',
-    headers: {'x-access-token': token},
+    headers: { 'x-access-token': token },
     data: fd,
     url: apiUrl + 'media',
   };
@@ -239,7 +241,7 @@ const postFavourite = async (fileId, token) => {
       'Content-Type': 'application/json',
       'x-access-token': token,
     },
-    body: JSON.stringify({file_id: fileId}),
+    body: JSON.stringify({ file_id: fileId }),
   };
   try {
     const response = await fetch(apiUrl + 'favourites', options);
@@ -324,8 +326,22 @@ const getCommentUser = async (id) => {
   // http://media.mw.metropolia.fi/wbma/docs/#api-Comment-GetCurrentUserComments
 };
 
-
 export {
-  useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile, postComment, getCommentFile, getCommentUser,
-  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser, postFavourite, getFavourite,
+  useLoadMedia,
+  postLogIn,
+  checkToken,
+  postRegistration,
+  getAvatar,
+  updateFile,
+  postComment,
+  getCommentFile,
+  getCommentUser,
+  checkAvailable,
+  upload,
+  deleteFile,
+  appIdentifier,
+  postTag,
+  getUser,
+  postFavourite,
+  getFavourite,
 };
