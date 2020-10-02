@@ -4,7 +4,16 @@ import {Image} from 'react-native';
 import {AuthContext} from '../contexts/AuthContext';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Container, Content, Card, Icon, CardItem, Text, Body, Button} from 'native-base';
+import {
+  Container,
+  Content,
+  Card,
+  Icon,
+  CardItem,
+  Text,
+  Body,
+  Button,
+} from 'native-base';
 import {getAvatar} from '../hooks/APIhooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -14,7 +23,7 @@ const Profile = ({navigation}) => {
   const [avatar, setAvatar] = useState([{filename: ''}]);
 
   const fetchAvatar = async () => {
-    setAvatar(await getAvatar());
+    setAvatar(await getAvatar(user.user_id));
   };
 
   useEffect(() => {
@@ -32,10 +41,10 @@ const Profile = ({navigation}) => {
   return (
     <Container>
       <Content>
-        {user &&
+        {user && (
           <Card>
             <CardItem header bordered>
-              <Icon name='person' />
+              <Icon name="person" />
               <Text>Username: {user.username}</Text>
             </CardItem>
             <CardItem>
@@ -55,15 +64,19 @@ const Profile = ({navigation}) => {
                 <Button block info onPress={logout}>
                   <Text>Logout</Text>
                 </Button>
-                <Button block info onPress={() => {
-                  navigation.navigate('MyFiles');
-                }}>
+                <Button
+                  block
+                  info
+                  onPress={() => {
+                    navigation.navigate('MyFiles');
+                  }}
+                >
                   <Text>My files</Text>
                 </Button>
               </Body>
             </CardItem>
           </Card>
-        }
+        )}
       </Content>
     </Container>
   );

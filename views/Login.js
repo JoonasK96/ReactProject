@@ -33,19 +33,20 @@ const Login = ({navigation}) => { // props is needed for navigation
   }, []);
 
   return (
-    <Container>
+    <Container style={{backgroundColor: '#93BBF5'}}>
       <Content padder>
-        <Title>
+        <Title style={{textAlign: 'center'}}>
           <Icon name='happy' style={{fontSize: 200}} />
         </Title>
+        <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>MEEMIAPPI</Text>
         {showRegistration ?
           <LoginForm navigation={navigation} /> :
           <RegisterForm navigation={navigation} />
         }
-        <View style={{alignItems: 'center'}}>
-          <Text>or</Text>
+        <View>
+          <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>or</Text>
         </View>
-        <Button info block onPress={() => {
+        <Button block style={{backgroundColor: '#998AFA'}} onPress={() => {
           setShowRegistration(!showRegistration);
         }}>
           <Text>{showRegistration ? 'Register' : 'Login'}</Text>

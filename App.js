@@ -12,7 +12,7 @@ const App = () => {
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
     });
     setFontReady(true);
-  }
+  };
   useEffect(() => {
     loadFonts();
   }, []);

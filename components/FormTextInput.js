@@ -6,7 +6,7 @@ const FormTextInput = ({style, error, ...otherProps}) => {
   return (
     <View>
       <Item>
-        <Input
+        <Input style={{textAlign: 'center'}}
           {...otherProps}
         />
       </Item>

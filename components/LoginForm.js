@@ -30,7 +30,7 @@ const LoginForm = ({navigation}) => {
 
   return (
     <Form>
-      <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>
+      <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>
         Sign in
       </Text>
       <FormTextInput
@@ -46,7 +46,7 @@ const LoginForm = ({navigation}) => {
         secureTextEntry={true}
         error={loginErrors.password}
       />
-      <Button block info onPress={doLogin}>
+      <Button style={{backgroundColor: '#998AFA'}} block onPress={doLogin}>
         <Text>Login!</Text>
       </Button>
     </Form>

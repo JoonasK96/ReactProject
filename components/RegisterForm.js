@@ -81,7 +81,7 @@ const RegisterForm = ({navigation}) => {
         secureTextEntry={true}
         error={registerErrors.confirmPassword}
       />
-      <Button block info onPress={doRegister}>
+      <Button style={{backgroundColor: '#998AFA'}} block onPress={doRegister}>
         <Text>Register!</Text>
       </Button>
     </Form>

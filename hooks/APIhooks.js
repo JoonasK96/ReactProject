@@ -92,9 +92,9 @@ const checkToken = async (token) => {
   }
 };
 
-const getAvatar = async () => {
+const getAvatar = async (id) => {
   try {
-    const response = await fetch(apiUrl + 'tags/avatar_649');
+    const response = await fetch(apiUrl + 'tags/avatar_' + id);
     const avatarImages = await response.json();
     if (response.ok) {
       return avatarImages;
@@ -270,7 +270,62 @@ const getFavourite = async (fileId) => {
   // http://media.mw.metropolia.fi/wbma/docs/#api-Favourite-GetFileFavourites
 };
 
+const postComment = async (token, comment) => {
+  console.log('postComment', token, comment);
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify(comment),
+  };
+  try {
+    const response = await fetch(apiUrl + 'comments', options);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  // http://media.mw.metropolia.fi/wbma/docs/#api-Comment-PostComment
+};
+
+const getCommentFile = async (fileId) => {
+  try {
+    const response = await fetch(apiUrl + 'comments/file/' + fileId);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  // http://media.mw.metropolia.fi/wbma/docs/#api-Comment-GetFileComments
+};
+
+const getCommentUser = async (id) => {
+  try {
+    const response = await fetch(apiUrl + 'comments/' + id);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  // http://media.mw.metropolia.fi/wbma/docs/#api-Comment-GetCurrentUserComments
+};
+
+
 export {
-  useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile,
+  useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile, postComment, getCommentFile, getCommentUser,
   checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser, postFavourite, getFavourite,
 };
