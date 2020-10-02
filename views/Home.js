@@ -19,7 +19,7 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#84DEF5',
     // alignItems: 'center',
     // justifyContent: 'center',
   },

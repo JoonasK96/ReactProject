@@ -6,9 +6,18 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {checkToken} from '../hooks/APIhooks';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
-import {Container, Content, Title, Icon, Button, Text, View} from 'native-base';
+import {
+  Container,
+  Content,
+  Title,
+  Icon,
+  Button,
+  Text,
+  View,
+} from 'native-base';
 
-const Login = ({navigation}) => { // props is needed for navigation
+const Login = ({navigation}) => {
+  // props is needed for navigation
   const {setIsLoggedIn, setUser} = useContext(AuthContext);
   const [showRegistration, setShowRegistration] = useState(true);
   // console.log('Login', isLoggedIn);
@@ -35,19 +44,24 @@ const Login = ({navigation}) => { // props is needed for navigation
   return (
     <Container>
       <Content padder>
-        <Title>
-          <Icon name='happy' style={{fontSize: 200}} />
+        <Title style={{textAlign: 'center'}}>
+          <Icon name="happy" style={{fontSize: 200}} />
         </Title>
-        {showRegistration ?
-          <LoginForm navigation={navigation} /> :
+        {showRegistration ? (
+          <LoginForm navigation={navigation} />
+        ) : (
           <RegisterForm navigation={navigation} />
-        }
+        )}
         <View style={{alignItems: 'center'}}>
           <Text>or</Text>
         </View>
-        <Button info block onPress={() => {
-          setShowRegistration(!showRegistration);
-        }}>
+        <Button
+          info
+          block
+          onPress={() => {
+            setShowRegistration(!showRegistration);
+          }}
+        >
           <Text>{showRegistration ? 'Register' : 'Login'}</Text>
         </Button>
       </Content>

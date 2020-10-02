@@ -61,7 +61,7 @@ const Profile = ({navigation}) => {
             </CardItem>
             <CardItem>
               <Body>
-                <Button block info onPress={logout}>
+                <Button dark block bordered onPress={logout}>
                   <Text>Logout</Text>
                 </Button>
                 <Button

@@ -14,8 +14,9 @@ const List = ({navigation, all}) => {
     <FlatList
       data={mediaArray}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) =>
-        <ListItem singleMedia={item} navigation={navigation} editable={!all} />}
+      renderItem={({item}) => (
+        <ListItem singleMedia={item} navigation={navigation} editable={!all} />
+      )}
     />
   );
 };

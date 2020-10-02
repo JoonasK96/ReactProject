@@ -48,10 +48,10 @@ const ListItem = ({navigation, singleMedia, editable}) => {
   }, []);
 
   return (
-    <NBListItem>
+    <NBListItem style={{backgroundColor: '#84DEF5'}}>
       <Content>
-        <Card>
-          <CardItem>
+        <Card style={{backgroundColor: '#F4EFB3'}}>
+          <CardItem style={{backgroundColor: '#F4EFB3'}}>
             <Left>
               <Thumbnail
                 source={{uri: mediaUrl + avatar[0].filename}}
@@ -71,7 +71,7 @@ const ListItem = ({navigation, singleMedia, editable}) => {
           </CardItem>
 
           <Right>
-            <Button transparent onPress={
+            <Button block style={{backgroundColor: '#F595B6'}} onPress={
               () => {
                 navigation.navigate('Single', {file: singleMedia});
               }}>

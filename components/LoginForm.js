@@ -10,7 +10,12 @@ import {Button, Text, Form} from 'native-base';
 
 const LoginForm = ({navigation}) => {
   const {setIsLoggedIn, setUser} = useContext(AuthContext);
-  const {handleInputChange, inputs, loginErrors, validateOnSend} = useLoginForm();
+  const {
+    handleInputChange,
+    inputs,
+    loginErrors,
+    validateOnSend,
+  } = useLoginForm();
 
   const doLogin = async () => {
     if (!validateOnSend()) {
