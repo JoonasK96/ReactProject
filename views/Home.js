@@ -11,7 +11,7 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <List navigation={navigation} all />
-      <StatusBar style="auto" />
+      <StatusBar style="light" translucent={false} />
     </View>
   );
 };

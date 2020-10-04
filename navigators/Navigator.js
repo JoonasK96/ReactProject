@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
+// import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
@@ -10,16 +10,18 @@ import {AuthContext} from '../contexts/AuthContext';
 import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
+// const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 const TabScreen = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Profile' component={Profile} />
-      <Tab.Screen name='Upload' component={Upload} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Upload" component={Upload} />
     </Tab.Navigator>
   );
 };
@@ -27,20 +29,30 @@ const TabScreen = () => {
 const StackScreen = () => {
   const {isLoggedIn} = useContext(AuthContext);
   return (
-    <Stack.Navigator>
+    // <Stack.Navigator>
+    <Drawer.Navigator initialRouteName="Home">
+
+
       {isLoggedIn ? (
         <>
-          <Stack.Screen name="Home" component={TabScreen} />
-          <Stack.Screen name="Single" component={Single} />
-          <Stack.Screen name="MyFiles" component={MyFiles} />
-          <Stack.Screen name="Modify" component={Modify} />
+          <Drawer.Screen name="Home" component={TabScreen} />
+          <Drawer.Screen name="Single" component={Single} />
+          <Drawer.Screen name="MyFiles" component={MyFiles} />
+          <Drawer.Screen name="Modify" component={Modify} />
+          {/* // <Stack.Screen name="Home" component={TabScreen} />
+          // <Stack.Screen name="Single" component={Single} />
+          // <Stack.Screen name="MyFiles" component={MyFiles} />
+        // <Stack.Screen name="Modify" component={Modify} /> */}
         </>
       ) : (
           <>
-            <Stack.Screen name="Login" component={Login} />
+            {/* <Stack.Screen name="Login" component={Login} /> */}
+            <Drawer.Screen name="Login" component={Login} />
           </>
         )}
-    </Stack.Navigator>
+
+    </Drawer.Navigator>
+    // </Stack.Navigator>
   );
 };
 
