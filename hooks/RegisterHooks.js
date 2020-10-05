@@ -73,10 +73,14 @@ const useSignUpForm = (callback) => {
     });
     let error;
     if (name === 'confirmPassword') {
-      error = validator(name, {
-        password: inputs.password,
-        confirmPassword: text,
-      }, constraints);
+      error = validator(
+          name,
+          {
+            password: inputs.password,
+            confirmPassword: text,
+          },
+          constraints,
+      );
     } else {
       error = validator(name, text, constraints);
     }
@@ -93,10 +97,14 @@ const useSignUpForm = (callback) => {
     const usernameError = validator('username', inputs.username, constraints);
     const passwordError = validator('password', inputs.password, constraints);
     const emailError = validator('email', inputs.email, constraints);
-    const confirmError = validator('confirmPassword', {
-      password: inputs.password,
-      confirmPassword: inputs.confirm,
-    }, constraints);
+    const confirmError = validator(
+        'confirmPassword',
+        {
+          password: inputs.password,
+          confirmPassword: inputs.confirm,
+        },
+        constraints,
+    );
 
     const fullNameError = validator('full_name', inputs.full_name, constraints);
     setRegisterErrors((registerErrors) => ({
@@ -107,7 +115,6 @@ const useSignUpForm = (callback) => {
       confirm: confirmError,
       full_name: fullNameError,
     }));
-
 
     for (const val of Object.values(registerErrors)) {
       console.log('validation error: ', val);

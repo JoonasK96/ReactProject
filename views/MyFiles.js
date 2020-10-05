@@ -5,7 +5,6 @@ import {StyleSheet, View} from 'react-native';
 import List from '../components/List';
 import PropTypes from 'prop-types';
 
-
 const MyFiles = ({navigation}) => {
   return (
     <View style={styles.container}>

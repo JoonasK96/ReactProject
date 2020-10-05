@@ -32,7 +32,6 @@ const Upload = ({navigation}) => {
       let type = match ? `${fileType}/${match[1]}` : fileType;
       if (type === 'image/jpg') type = 'image/jpeg';
 
-
       formData.append('file', {uri: image, name: filename, type});
 
       // haetaan token
@@ -42,10 +41,13 @@ const Upload = ({navigation}) => {
       const resp = await upload(formData, userToken);
       console.log('File uploaded: ', resp);
 
-      const postTagResponse = await postTag({
-        file_id: resp.file_id,
-        tag: appIdentifier,
-      }, userToken);
+      const postTagResponse = await postTag(
+          {
+            file_id: resp.file_id,
+            tag: appIdentifier,
+          },
+          userToken,
+      );
       console.log('posting tag:', postTagResponse);
 
       // odotetaan 2 sekuntia
@@ -93,12 +95,7 @@ const Upload = ({navigation}) => {
     getPermissionAsync();
   }, []);
 
-  const {
-    handleInputChange,
-    reset,
-    uploadErrors,
-    inputs,
-  } = useUploadForm();
+  const {handleInputChange, reset, uploadErrors, inputs} = useUploadForm();
 
   const doReset = () => {
     reset();
@@ -109,21 +106,22 @@ const Upload = ({navigation}) => {
   return (
     <Container>
       <Content padder>
-        {image &&
+        {image && (
           <>
-            {fileType === 'image' ?
+            {fileType === 'image' ? (
               <Image
                 source={{uri: image}}
                 style={{height: 400, width: null, flex: 1}}
-              /> :
+              />
+            ) : (
               <Video
                 source={{uri: image}}
                 style={{height: 400, width: null, flex: 1}}
                 useNativeControls={true}
               />
-            }
+            )}
           </>
-        }
+        )}
         <Form>
           <FormTextInput
             autoCapitalize="none"
@@ -143,8 +141,16 @@ const Upload = ({navigation}) => {
         <Button block info onPress={pickImage}>
           <Text>Choose file</Text>
         </Button>
-        <Button block info disabled={uploadErrors.title !== null ||
-          uploadErrors.description !== null || image === null} onPress={doUpload}>
+        <Button
+          block
+          info
+          disabled={
+            uploadErrors.title !== null ||
+            uploadErrors.description !== null ||
+            image === null
+          }
+          onPress={doUpload}
+        >
           <Text>Upload</Text>
         </Button>
         {isLoading && <Spinner />}

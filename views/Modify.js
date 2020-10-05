@@ -64,8 +64,14 @@ const Modify = ({navigation, route}) => {
             error={uploadErrors.description}
           />
         </Form>
-        <Button block info disabled={uploadErrors.title !== null ||
-          uploadErrors.description !== null} onPress={doModify}>
+        <Button
+          block
+          info
+          disabled={
+            uploadErrors.title !== null || uploadErrors.description !== null
+          }
+          onPress={doModify}
+        >
           <Text>Save</Text>
         </Button>
         {isLoading && <Spinner />}

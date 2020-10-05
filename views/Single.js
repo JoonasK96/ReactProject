@@ -3,9 +3,25 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
-import {Card, CardItem, Left, Icon, Title, Container, Content, Text, Button} from 'native-base';
+import {
+  Card,
+  CardItem,
+  Left,
+  Icon,
+  Title,
+  Container,
+  Content,
+  Text,
+  Button,
+} from 'native-base';
 import {Video} from 'expo-av';
-import {getFavourite, getUser, postFavourite, getCommentFile, postComment} from '../hooks/APIhooks';
+import {
+  getFavourite,
+  getUser,
+  postFavourite,
+  getCommentFile,
+  postComment,
+} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {AuthContext} from '../contexts/AuthContext';
@@ -22,7 +38,7 @@ const Single = ({route}) => {
     favourites.forEach((favourite) => {
       if (favourite.user_id == user.user_id) {
         setFavourited(true);
-      };
+      }
     });
   });
   const [favourited, setFavourited] = useState(false);
@@ -46,7 +62,9 @@ const Single = ({route}) => {
   };
 
   const lock = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+    );
   };
 
   const fetchData = async () => {
@@ -86,17 +104,18 @@ const Single = ({route}) => {
           </CardItem>
           <CardItem cardBody>
             <>
-              {file.media_type === 'image' ?
+              {file.media_type === 'image' ? (
                 <Image
                   source={{uri: mediaUrl + file.filename}}
                   style={{height: 400, width: null, flex: 1}}
-                /> :
+                />
+              ) : (
                 <Video
                   ref={handleVideoRef}
                   source={{
-                    uri:
-                      error ? 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
-                        mediaUrl + file.filename,
+                    uri: error ?
+                      'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
+                      mediaUrl + file.filename,
                   }}
                   style={{height: 400, width: null, flex: 1}}
                   useNativeControls={true}
@@ -109,24 +128,24 @@ const Single = ({route}) => {
                     setError(true);
                   }}
                 />
-              }
+              )}
             </>
           </CardItem>
           <CardItem style={{flexDirection: 'column'}}>
-            <Text>
-              {file.description}
-            </Text>
-            <Text>
-              By: {owner.username}
-            </Text>
-            <Button info disabled={favourited} onPress={async () => {
-              try {
-                const userToken = await AsyncStorage.getItem('userToken');
-                postFavourite(file.file_id, userToken);
-              } catch (e) {
-                console.log(e);
-              }
-            }}>
+            <Text>{file.description}</Text>
+            <Text>By: {owner.username}</Text>
+            <Button
+              info
+              disabled={favourited}
+              onPress={async () => {
+                try {
+                  const userToken = await AsyncStorage.getItem('userToken');
+                  postFavourite(file.file_id, userToken);
+                } catch (e) {
+                  console.log(e);
+                }
+              }}
+            >
               <Text>LIKE</Text>
             </Button>
             <CommentForm pekka={file.file_id} />
@@ -134,7 +153,6 @@ const Single = ({route}) => {
         </Card>
       </Content>
     </Container>
-
   );
 };
 

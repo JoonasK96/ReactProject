@@ -6,9 +6,18 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {checkToken} from '../hooks/APIhooks';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
-import {Container, Content, Title, Icon, Button, Text, View} from 'native-base';
+import {
+  Container,
+  Content,
+  Title,
+  Icon,
+  Button,
+  Text,
+  View,
+} from 'native-base';
 
-const Login = ({navigation}) => { // props is needed for navigation
+const Login = ({navigation}) => {
+  // props is needed for navigation
   const {setIsLoggedIn, setUser} = useContext(AuthContext);
   const [showRegistration, setShowRegistration] = useState(true);
   // console.log('Login', isLoggedIn);
@@ -36,19 +45,30 @@ const Login = ({navigation}) => { // props is needed for navigation
     <Container style={{backgroundColor: '#93BBF5'}}>
       <Content padder>
         <Title style={{textAlign: 'center'}}>
-          <Icon name='happy' style={{fontSize: 200}} />
+          <Icon name="happy" style={{fontSize: 200}} />
         </Title>
-        <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>MEEMIAPPI</Text>
-        {showRegistration ?
-          <LoginForm navigation={navigation} /> :
+        <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>
+          MEEMIAPPI
+        </Text>
+        {showRegistration ? (
+          <LoginForm navigation={navigation} />
+        ) : (
           <RegisterForm navigation={navigation} />
-        }
+        )}
         <View>
-          <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>or</Text>
+          <Text
+            style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}
+          >
+            or
+          </Text>
         </View>
-        <Button block style={{backgroundColor: '#998AFA'}} onPress={() => {
-          setShowRegistration(!showRegistration);
-        }}>
+        <Button
+          block
+          style={{backgroundColor: '#998AFA'}}
+          onPress={() => {
+            setShowRegistration(!showRegistration);
+          }}
+        >
           <Text>{showRegistration ? 'Register' : 'Login'}</Text>
         </Button>
       </Content>

@@ -1,7 +1,8 @@
+/* eslint-disable react/display-name */
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import {DrawerActions, NavigationContainer} from '@react-navigation/native';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
 import Single from '../views/Single';
@@ -10,17 +11,24 @@ import {AuthContext} from '../contexts/AuthContext';
 import Upload from '../views/Upload';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Body, Button, Header, Icon, Left, Title, Text} from 'native-base';
+import {color} from 'react-native-reanimated';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
 
 const TabScreen = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Upload" component={Upload} />
-    </Tab.Navigator>
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Upload" component={Upload} />
+      <Drawer.Screen name="Login" component={Login} />
+    </Drawer.Navigator>
   );
 };
 
@@ -30,16 +38,29 @@ const StackScreen = () => {
     <Stack.Navigator>
       {isLoggedIn ? (
         <>
-          <Stack.Screen name="Home" component={TabScreen} />
+
+          <Stack.Screen name="Home"
+            component={TabScreen}
+            options={({navigation}) => ({
+              // title: 'Awesome app',
+              headerLeft: () => (
+                // eslint-disable-next-line max-len
+                <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
+                  <Icon name="menu"/>
+                </Button>
+              ),
+            })} />
           <Stack.Screen name="Single" component={Single} />
           <Stack.Screen name="MyFiles" component={MyFiles} />
           <Stack.Screen name="Modify" component={Modify} />
         </>
       ) : (
-        <>
-          <Stack.Screen name="Login" component={Login} />
-        </>
-      )}
+          <>
+            <Stack.Screen name="Login" component={Login} />
+
+          </>
+        )}
+
     </Stack.Navigator>
   );
 };
@@ -47,6 +68,7 @@ const StackScreen = () => {
 const Navigator = () => {
   return (
     <NavigationContainer>
+
       <StackScreen />
     </NavigationContainer>
   );

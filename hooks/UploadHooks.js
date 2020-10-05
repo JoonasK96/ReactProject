@@ -49,7 +49,11 @@ const useUploadForm = (callback) => {
 
   const validateOnSend = () => {
     const titleError = validator('title', inputs.title, constraints);
-    const descriptionError = validator('description', inputs.description, constraints);
+    const descriptionError = validator(
+        'description',
+        inputs.description,
+        constraints,
+    );
     if (titleError !== null || descriptionError !== null) {
       return false;
     } else {
