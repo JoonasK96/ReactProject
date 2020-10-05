@@ -35,6 +35,26 @@ const useLoadMedia = (all, userId) => {
   return mediaArray;
 };
 
+const useComments = (fileId) => {
+  const [commentArray, setCommentArray] = useState([]);
+
+  const loadComments = async () => {
+    try {
+      // const response = await fetch(apiUrl + 'media');
+      const response = await fetch(apiUrl + 'comments/file/' + fileId);
+      const json = await response.json();
+      setCommentArray(json);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    loadComments();
+  }, []);
+
+  return commentArray;
+};
+
 const postLogIn = async (userCreds) => {
   const options = {
     method: 'POST',
@@ -327,5 +347,5 @@ const getCommentUser = async (id) => {
 
 export {
   useLoadMedia, postLogIn, checkToken, postRegistration, getAvatar, updateFile, postComment, getCommentFile, getCommentUser,
-  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser, postFavourite, getFavourite,
+  checkAvailable, upload, deleteFile, appIdentifier, postTag, getUser, postFavourite, getFavourite, useComments,
 };

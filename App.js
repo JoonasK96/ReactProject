@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <Navigator />
+      <Navigator style={{backgroundColor: '#93BBF5'}} />
     </AuthProvider>
   );
 };

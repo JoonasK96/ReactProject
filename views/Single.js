@@ -11,6 +11,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import {AuthContext} from '../contexts/AuthContext';
 import useStateWithCallback from 'use-state-with-callback';
 import CommentForm from '../components/CommentForm';
+import CommentList from '../components/CommentList';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -75,10 +76,10 @@ const Single = ({route}) => {
 
   console.log('kuva');
   return (
-    <Container>
+    <Container style={{backgroundColor: '#93BBF5'}}>
       <Content padder>
         <Card>
-          <CardItem>
+          <CardItem style={{backgroundColor: '#7A88DE'}}>
             <Left>
               <Icon name={'image'} />
               <Title>{file.title}</Title>
@@ -112,7 +113,7 @@ const Single = ({route}) => {
               }
             </>
           </CardItem>
-          <CardItem style={{flexDirection: 'column'}}>
+          <CardItem style={{flexDirection: 'column'}} >
             <Text>
               {file.description}
             </Text>
@@ -130,6 +131,7 @@ const Single = ({route}) => {
               <Text>LIKE</Text>
             </Button>
             <CommentForm pekka={file.file_id} />
+            <CommentList fileId={file.file_id} />
           </CardItem>
         </Card>
       </Content>

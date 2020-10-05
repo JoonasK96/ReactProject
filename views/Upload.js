@@ -107,7 +107,7 @@ const Upload = ({navigation}) => {
   };
 
   return (
-    <Container>
+    <Container style={{backgroundColor: '#93BBF5'}}>
       <Content padder>
         {image &&
           <>
@@ -140,7 +140,7 @@ const Upload = ({navigation}) => {
             error={uploadErrors.description}
           />
         </Form>
-        <Button block info onPress={pickImage}>
+        <Button style={{backgroundColor: '#998AFA'}} block info onPress={pickImage}>
           <Text>Choose file</Text>
         </Button>
         <Button block info disabled={uploadErrors.title !== null ||
@@ -148,7 +148,7 @@ const Upload = ({navigation}) => {
           <Text>Upload</Text>
         </Button>
         {isLoading && <Spinner />}
-        <Button block info onPress={doReset}>
+        <Button style={{backgroundColor: '#998AFA'}} block onPress={doReset}>
           <Text>Reset</Text>
         </Button>
       </Content>

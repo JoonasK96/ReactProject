@@ -46,17 +46,17 @@ const ListItem = ({navigation, singleMedia, editable}) => {
   }, []);
 
   return (
-    <NBListItem style={{backgroundColor: '#84DEF5'}}>
+    <NBListItem style={{backgroundColor: '#93BBF5'}}>
       <Content>
-        <Card style={{backgroundColor: '#F4EFB3'}}>
-          <CardItem style={{backgroundColor: '#F4EFB3'}}>
+        <Card style={{backgroundColor: '#7A88DE'}}>
+          <CardItem style={{backgroundColor: '#7A88DE'}}>
             <Left>
               <Thumbnail
                 source={{uri: mediaUrl + avatar[0].filename}}
               />
               <Body>
                 <Text>{singleMedia.title}</Text>
-                <Text note numberOfLines={1}> By: {owner.username}</Text>
+                <Text numberOfLines={1}> By: {owner.username}</Text>
               </Body>
             </Left>
           </CardItem>
@@ -69,7 +69,7 @@ const ListItem = ({navigation, singleMedia, editable}) => {
           </CardItem>
 
           <Right>
-            <Button block style={{backgroundColor: '#F595B6'}} onPress={
+            <Button style={{backgroundColor: '#998AFA'}} block onPress={
               () => {
                 navigation.navigate('Single', {file: singleMedia});
               }}>

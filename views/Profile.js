@@ -39,38 +39,34 @@ const Profile = ({navigation}) => {
     navigation.navigate('Login');
   };
   return (
-    <Container>
+    <Container style={{backgroundColor: '#93BBF5'}}>
       <Content>
         {user && (
           <Card>
-            <CardItem header bordered>
+            <CardItem header bordered style={{backgroundColor: '#7A88DE'}}>
               <Icon name="person" />
-              <Text>Username: {user.username}</Text>
+              <Text style={{color: 'black'}}>Username: {user.username}</Text>
             </CardItem>
-            <CardItem>
+            <CardItem style={{backgroundColor: '#7A88DE'}}>
               <Image
                 source={{uri: mediaUrl + avatar[0].filename}}
                 style={{height: 400, width: null, flex: 1}}
               />
             </CardItem>
-            <CardItem>
+            <CardItem style={{backgroundColor: '#7A88DE'}}>
               <Body>
                 <Text>Fullname: {user.full_name}</Text>
                 <Text>Email: {user.email}</Text>
               </Body>
             </CardItem>
-            <CardItem>
+            <CardItem style={{backgroundColor: '#7A88DE'}}>
               <Body>
-                <Button block info onPress={logout}>
+                <Button block style={{backgroundColor: '#998AFA'}} onPress={logout}>
                   <Text>Logout</Text>
                 </Button>
-                <Button
-                  block
-                  info
-                  onPress={() => {
-                    navigation.navigate('MyFiles');
-                  }}
-                >
+                <Button block style={{backgroundColor: '#998AFA'}} onPress={() => {
+                  navigation.navigate('MyFiles');
+                }}>
                   <Text>My files</Text>
                 </Button>
               </Body>

@@ -1,28 +1,25 @@
 /* eslint-disable max-len */
-import React, {useContext} from 'react';
+import React from 'react';
 import {FlatList} from 'react-native';
-import ListItem from './ListItem';
+import CommentListItem from './CommentListItem';
 import PropTypes from 'prop-types';
-import {useLoadMedia} from '../hooks/APIhooks';
-import {AuthContext} from '../contexts/AuthContext';
+import {useComments} from '../hooks/APIhooks';
 
-const List = ({navigation, all}) => {
-  const {user} = useContext(AuthContext);
-  const mediaArray = useLoadMedia(all, user.user_id);
-
+const CommentList = ({fileId}) => {
+  const comments = useComments(fileId);
+  console.log('kommentit: ', comments);
   return (
     <FlatList
-      data={mediaArray}
+      data={comments}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) =>
-        <ListItem singleMedia={item} navigation={navigation} editable={!all} />}
+        <CommentListItem singleComment={item} />}
     />
   );
 };
 
-List.propTypes = {
-  navigation: PropTypes.object,
-  all: PropTypes.bool,
+CommentList.propTypes = {
+  fileId: PropTypes.number,
 };
 
-export default List;
+export default CommentList;

@@ -46,7 +46,7 @@ const Modify = ({navigation, route}) => {
   };
 
   return (
-    <Container>
+    <Container style={{backgroundColor: '#93BBF5'}}>
       <Content padder>
         <Form>
           <FormTextInput
@@ -69,7 +69,7 @@ const Modify = ({navigation, route}) => {
           <Text>Save</Text>
         </Button>
         {isLoading && <Spinner />}
-        <Button block info onPress={doReset}>
+        <Button style={{backgroundColor: '#998AFA'}} block onPress={doReset}>
           <Text>Reset</Text>
         </Button>
       </Content>
