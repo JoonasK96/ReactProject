@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {AuthContext} from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import {postComment} from '../hooks/APIhooks';
 import FormTextInput from './FormTextInput';

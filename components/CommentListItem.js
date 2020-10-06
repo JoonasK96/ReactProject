@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {
-  ListItem as NBListItem,
   Text,
   Card,
   CardItem,
-  Content,
 } from 'native-base';
 import {getUser} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
