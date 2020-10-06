@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/display-name */
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,7 +20,7 @@ const Drawer = createDrawerNavigator();
 
 const TabScreen = () => {
   return (
-    <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Navigator drawerStyle={{backgroundColor: '#93BBF5'}}>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Upload" component={Upload} />
@@ -38,9 +39,11 @@ const StackScreen = () => {
             component={TabScreen}
             options={({navigation}) => ({
               // title: 'Awesome app',
+              headerStyle: {
+                backgroundColor: '#7A88DE',
+              },
               headerLeft: () => (
-                // eslint-disable-next-line max-len
-                <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
+                <Button style={{backgroundColor: '#998AFA'}} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
                   <Icon name="menu" />
                 </Button>
               ),
