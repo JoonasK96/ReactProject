@@ -77,64 +77,62 @@ const Single = ({route}) => {
   console.log('kuva');
   return (
     <Container style={{backgroundColor: '#93BBF5'}}>
-      <Content padder>
-        <Card>
-          <CardItem style={{backgroundColor: '#7A88DE'}}>
-            <Left>
-              <Icon name={'image'} />
-              <Title>{file.title}</Title>
-            </Left>
-          </CardItem>
-          <CardItem cardBody>
-            <>
-              {file.media_type === 'image' ?
-                <Image
-                  source={{uri: mediaUrl + file.filename}}
-                  style={{height: 400, width: null, flex: 1}}
-                /> :
-                <Video
-                  ref={handleVideoRef}
-                  source={{
-                    uri:
-                      error ? 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
-                        mediaUrl + file.filename,
-                  }}
-                  style={{height: 400, width: null, flex: 1}}
-                  useNativeControls={true}
-                  resizeMode="cover"
-                  posterSource={{uri: mediaUrl + file.screenshot}}
-                  usePoster={true}
-                  posterStyle={{height: 400, width: null, flex: 1}}
-                  onError={(err) => {
-                    console.log('Video error', err);
-                    setError(true);
-                  }}
-                />
-              }
-            </>
-          </CardItem>
-          <CardItem style={{flexDirection: 'column'}} >
-            <Text>
-              {file.description}
-            </Text>
-            <Text>
-              By: {owner.username}
-            </Text>
-            <Button info disabled={favourited} onPress={async () => {
-              try {
-                const userToken = await AsyncStorage.getItem('userToken');
-                postFavourite(file.file_id, userToken);
-              } catch (e) {
-                console.log(e);
-              }
-            }}>
-              <Text>LIKE</Text>
-            </Button>
-            <CommentForm pekka={file.file_id} />
-            <CommentList fileId={file.file_id} />
-          </CardItem>
-        </Card>
-      </Content>
+      <Card>
+        <CardItem style={{backgroundColor: '#7A88DE'}}>
+          <Left>
+            <Icon name={'image'} />
+            <Title>{file.title}</Title>
+          </Left>
+        </CardItem>
+        <CardItem cardBody>
+          <>
+            {file.media_type === 'image' ?
+              <Image
+                source={{uri: mediaUrl + file.filename}}
+                style={{height: 400, width: null, flex: 1}}
+              /> :
+              <Video
+                ref={handleVideoRef}
+                source={{
+                  uri:
+                    error ? 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' :
+                      mediaUrl + file.filename,
+                }}
+                style={{height: 400, width: null, flex: 1}}
+                useNativeControls={true}
+                resizeMode="cover"
+                posterSource={{uri: mediaUrl + file.screenshot}}
+                usePoster={true}
+                posterStyle={{height: 400, width: null, flex: 1}}
+                onError={(err) => {
+                  console.log('Video error', err);
+                  setError(true);
+                }}
+              />
+            }
+          </>
+        </CardItem>
+        <CardItem style={{flexDirection: 'column'}} >
+          <Text>
+            {file.description}
+          </Text>
+          <Text>
+            By: {owner.username}
+          </Text>
+          <Button info disabled={favourited} onPress={async () => {
+            try {
+              const userToken = await AsyncStorage.getItem('userToken');
+              postFavourite(file.file_id, userToken);
+            } catch (e) {
+              console.log(e);
+            }
+          }}>
+            <Text>LIKE</Text>
+          </Button>
+          <CommentForm pekka={file.file_id} />
+          <CommentList fileId={file.file_id} />
+        </CardItem>
+      </Card>
     </Container>
 
   );

@@ -37,17 +37,22 @@ const StackScreen = () => {
 
           <Stack.Screen name="Home"
             component={TabScreen}
-            options={({navigation}) => ({
-              // title: 'Awesome app',
-              headerStyle: {
-                backgroundColor: '#7A88DE',
-              },
-              headerLeft: () => (
-                <Button style={{backgroundColor: '#998AFA'}} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
-                  <Icon name="menu" />
-                </Button>
-              ),
-            })} />
+            options={({navigation, route}) => {
+              const seppo = {
+                headerStyle: {
+                  backgroundColor: '#7A88DE',
+                },
+                headerLeft: () => (
+                  <Button style={{backgroundColor: '#998AFA'}} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
+                    <Icon name="menu" />
+                  </Button>
+                ),
+              }
+              try {
+                seppo.title = route.state.routeNames[route.state.index];
+              } catch (e) {}
+              return seppo;
+            }} />
           <Stack.Screen name="Single" component={Single} />
           <Stack.Screen name="MyFiles" component={MyFiles} />
           <Stack.Screen name="Modify" component={Modify} />
