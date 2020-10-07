@@ -51,9 +51,7 @@ const ListItem = ({navigation, singleMedia, editable}) => {
         <Card style={{backgroundColor: '#7A88DE'}}>
           <CardItem style={{backgroundColor: '#7A88DE'}}>
             <Left>
-              <Thumbnail
-                source={{uri: mediaUrl + avatar[0].filename}}
-              />
+              <Thumbnail source={{uri: mediaUrl + avatar[0].filename}} />
               <Body>
                 <Text>{singleMedia.title}</Text>
                 <Text numberOfLines={1}> By: {owner.username}</Text>
@@ -64,32 +62,39 @@ const ListItem = ({navigation, singleMedia, editable}) => {
             <Thumbnail
               square
               source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
-              style={{height: 400, width: null, flex: 1}} />
-
+              style={{height: 400, width: null, flex: 1}}
+            />
           </CardItem>
 
           <Right>
-            <Button style={{backgroundColor: '#998AFA'}} block onPress={
-              () => {
+            <Button
+              style={{backgroundColor: '#998AFA'}}
+              block
+              onPress={() => {
                 navigation.navigate('Single', {file: singleMedia});
-              }}>
+              }}
+            >
               <Icon name={'eye'}></Icon>
               <Text>View</Text>
             </Button>
-            {editable && <>
-              <Button success transparent onPress={
-                () => {
-                  navigation.navigate('Modify', {file: singleMedia});
-                }}>
-                <Icon name={'create'}></Icon>
-                <Text>Modify</Text>
-              </Button>
-              <Button danger transparent onPress={doDelete}>
-                <Icon name={'trash'}></Icon>
-                <Text>Delete</Text>
-              </Button>
-            </>
-            }
+            {editable && (
+              <>
+                <Button
+                  success
+                  transparent
+                  onPress={() => {
+                    navigation.navigate('Modify', {file: singleMedia});
+                  }}
+                >
+                  <Icon name={'create'}></Icon>
+                  <Text>Modify</Text>
+                </Button>
+                <Button danger transparent onPress={doDelete}>
+                  <Icon name={'trash'}></Icon>
+                  <Text>Delete</Text>
+                </Button>
+              </>
+            )}
           </Right>
         </Card>
       </Content>

@@ -61,12 +61,20 @@ const Profile = ({navigation}) => {
             </CardItem>
             <CardItem style={{backgroundColor: '#7A88DE'}}>
               <Body>
-                <Button block style={{backgroundColor: '#998AFA'}} onPress={logout}>
+                <Button
+                  block
+                  style={{backgroundColor: '#998AFA'}}
+                  onPress={logout}
+                >
                   <Text>Logout</Text>
                 </Button>
-                <Button block style={{backgroundColor: '#998AFA'}} onPress={() => {
-                  navigation.navigate('MyFiles');
-                }}>
+                <Button
+                  block
+                  style={{backgroundColor: '#998AFA'}}
+                  onPress={() => {
+                    navigation.navigate('MyFiles');
+                  }}
+                >
                   <Text>My files</Text>
                 </Button>
               </Body>

@@ -12,8 +12,7 @@ const CommentList = ({fileId}) => {
     <FlatList
       data={comments}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) =>
-        <CommentListItem singleComment={item} />}
+      renderItem={({item}) => <CommentListItem singleComment={item} />}
     />
   );
 };

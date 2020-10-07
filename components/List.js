@@ -9,13 +9,14 @@ import {AuthContext} from '../contexts/AuthContext';
 const List = ({navigation, all}) => {
   const {user} = useContext(AuthContext);
   const mediaArray = useLoadMedia(all, user.user_id);
-
+  mediaArray.reverse();
   return (
     <FlatList
       data={mediaArray}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) =>
-        <ListItem singleMedia={item} navigation={navigation} editable={!all} />}
+      renderItem={({item}) => (
+        <ListItem singleMedia={item} navigation={navigation} editable={!all} />
+      )}
     />
   );
 };

@@ -9,7 +9,13 @@ import {Button, Text, Form} from 'native-base';
 
 const CommentForm = ({pekka}) => {
   const [kommentit, setKommentit] = useState('tänne tulee kommentit');
-  const {handleInputChange, inputs, commentErrors, validateOnSend, setInputs} = useCommentForm();
+  const {
+    handleInputChange,
+    inputs,
+    commentErrors,
+    validateOnSend,
+    setInputs,
+  } = useCommentForm();
   useEffect(() => {
     setInputs({file_id: pekka});
   }, []);
@@ -37,7 +43,11 @@ const CommentForm = ({pekka}) => {
           onChangeText={(txt) => handleInputChange('comment', txt)}
           error={commentErrors.comment}
         />
-        <Button style={{backgroundColor: '#998AFA'}} block onPress={doComment}>
+        <Button
+          style={{backgroundColor: '#998AFA'}}
+          block
+          onPress={doComment}
+        >
           <Text>Comment!</Text>
         </Button>
       </Form>

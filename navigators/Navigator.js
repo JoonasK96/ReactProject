@@ -17,7 +17,6 @@ import {Button, Icon} from 'native-base';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-
 const TabScreen = () => {
   return (
     <Drawer.Navigator drawerStyle={{backgroundColor: '#93BBF5'}}>
@@ -34,8 +33,8 @@ const StackScreen = () => {
     <Stack.Navigator>
       {isLoggedIn ? (
         <>
-
-          <Stack.Screen name="Home"
+          <Stack.Screen
+            name="Home"
             component={TabScreen}
             options={({navigation}) => ({
               // title: 'Awesome app',
@@ -43,22 +42,28 @@ const StackScreen = () => {
                 backgroundColor: '#7A88DE',
               },
               headerLeft: () => (
-                <Button style={{backgroundColor: '#998AFA'}} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} >
+                <Button
+                  style={{backgroundColor: '#998AFA'}}
+                  onPress={() =>
+                    navigation.dispatch(DrawerActions.toggleDrawer())
+                  }
+                >
                   <Icon name="menu" />
                 </Button>
               ),
-            })} />
+            })}
+          />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Upload" component={Upload} />
           <Stack.Screen name="Single" component={Single} />
           <Stack.Screen name="MyFiles" component={MyFiles} />
           <Stack.Screen name="Modify" component={Modify} />
         </>
       ) : (
-          <>
-            <Stack.Screen name="Login" component={Login} />
-
-          </>
-        )}
-
+        <>
+          <Stack.Screen name="Login" component={Login} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };
@@ -66,7 +71,6 @@ const StackScreen = () => {
 const Navigator = () => {
   return (
     <NavigationContainer>
-
       <StackScreen />
     </NavigationContainer>
   );
