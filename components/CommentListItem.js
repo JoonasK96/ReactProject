@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Text, Card, CardItem, Body, Left, List, ListItem, Thumbnail} from 'native-base';
+import {Text, CardItem, Body, Left, ListItem, Thumbnail} from 'native-base';
 import {getUser, getAvatar} from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
 
