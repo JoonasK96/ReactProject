@@ -30,7 +30,6 @@ import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
-let likes = 0;
 const Single = ({route}) => {
   const {user} = useContext(AuthContext);
   const [error, setError] = useState(false);
@@ -39,7 +38,6 @@ const Single = ({route}) => {
     favourites.forEach((favourite) => {
       if (favourite.user_id == user.user_id) {
         setFavourited(true);
-        likes++;
       }
     });
   });
@@ -96,7 +94,7 @@ const Single = ({route}) => {
   console.log('kuva');
   return (
     <Container style={{backgroundColor: '#93BBF5'}}>
-      <Content padder>
+      <Content>
         <Card>
           <CardItem style={{backgroundColor: '#7A88DE'}}>
             <Left>
