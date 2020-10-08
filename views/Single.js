@@ -28,7 +28,6 @@ import {AuthContext} from '../contexts/AuthContext';
 import useStateWithCallback from 'use-state-with-callback';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
-
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 const Single = ({route}) => {
   const {user} = useContext(AuthContext);
@@ -131,10 +130,9 @@ const Single = ({route}) => {
               )}
             </>
           </CardItem>
-          <CardItem style={{flexDirection: 'column'}}>
+          <CardItem style={{flexDirection: 'column', backgroundColor: '#7A88DE'}}>
             <Text>{file.description}</Text>
             <Text>By: {owner.username}</Text>
-            <Text>{likes}</Text>
             <Button
               info
               disabled={favourited}

@@ -46,15 +46,24 @@ const StackScreen = () => {
                     <Icon name="menu" />
                   </Button>
                 ),
-              }
+              };
               try {
                 seppo.title = route.state.routeNames[route.state.index];
               } catch (e) {}
               return seppo;
             }} />
-          <Stack.Screen name="Single" component={Single} />
-          <Stack.Screen name="MyFiles" component={MyFiles} />
-          <Stack.Screen name="Modify" component={Modify} />
+          <Stack.Screen name="Single" component={Single} options={{
+            headerStyle: {
+              backgroundColor: '#7A88DE',
+            }}}/>
+          <Stack.Screen name="MyFiles" component={MyFiles} options={{
+            headerStyle: {
+              backgroundColor: '#7A88DE',
+            }}} />
+          <Stack.Screen name="Modify" component={Modify} options={{
+            headerStyle: {
+              backgroundColor: '#7A88DE',
+            }}} />
         </>
       ) : (
         <>
